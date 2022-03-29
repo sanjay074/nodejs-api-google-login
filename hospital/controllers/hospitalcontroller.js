@@ -1,11 +1,11 @@
 const Joi =require ("joi");
-const Hospital = require('../models/hospitalmodel');
+const Hospital = require('../models/hospital');
 exports.addHospital = async(req,res)=>{
     const hospitalSchema = Joi.object({
-        HospitalName:Joi.string().min(3).max(30).required(),
-        hospitalLocation:Joi.string().min(10).max(50).required(),
-        allDoctors:Joi.number().required(),
-        ALLBeds:Joi.number().required(),
+        HospitalName:Joi.string().required(),
+        hospitalLocation:Joi.string().required(),
+        alldoctors:Joi.number().required(),
+        Allbeds:Joi.number().required(),
         Ambulances:Joi.number().required()
       
       });
@@ -23,17 +23,18 @@ exports.addHospital = async(req,res)=>{
     }catch(err){
         res.status(500).json(err)
     }
-    const { HospitalName ,hospitalLocation ,allDoctors ,ALLBeds ,Ambulances }= req.body ;
+    const {HospitalName,hospitalLocation,alldoctors,Allbeds,Ambulances }= req.body ;
     const newHospital = new Hospital({
         HospitalName,
         hospitalLocation,
-        allDoctors,
-        ALLBeds,
+        alldoctors,
+        Allbeds,
         Ambulances
     });
     try{
         const savedHospital = await newHospital.save();
         res.status(201).json(savedHospital);
+        console.log(savedHospital)
         }catch(err){
             res.status(500).json(err)
         }

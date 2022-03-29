@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const{addHospital,findHospital,findOne} = require('../controllers/hospitalControllers');
+const{addHospital,findHospital,findOne} = require('../controllers/hospitalcontroller');
 
 
 router.post('/addHospital',  addHospital);
