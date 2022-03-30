@@ -9,6 +9,12 @@ const hospitalSchema = new Schema({
         type:String,
         required: true
     },
+    latitude: { 
+        type:Number
+       },
+    longitude:{
+        type:Number
+    },
     alldoctors:{
         type:Number,
         required:true
