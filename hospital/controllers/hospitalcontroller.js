@@ -1,47 +1,41 @@
 const Joi =require ("joi");
 const Hospital = require('../models/hospital');
 exports.addHospital = async(req,res)=>{
-    const hospitalSchema = Joi.object({
-        HospitalName:Joi.string().required(),
-        hospitalLocation:Joi.string().required(),
-        latitude:Joi.number().required(),
-        longitude:Joi.number().required(),
-        alldoctors:Joi.number().required(),
-        Allbeds:Joi.number().required(),
-        Ambulances:Joi.number().required()
-      
-      });
-      const {error} =hospitalSchema.validate(req.body);
-      if(error){
-        res.status(500).json(error)
-      }
-
-    try{
-        const exist = await Hospital.exists({HospitalName:req.body. HospitalName});
+  let {HospitalName,hospitalLocation,latitude,longitude,alldoctors,Allbeds,Ambulances }= req.body 
+  const hospitalSchema = Joi.object({
+    HospitalName:Joi.string().required(),
+    hospitalLocation:Joi.string().required(),
+    latitude:Joi.number().required(),
+    longitude:Joi.number().required(),
+    alldoctors:Joi.number().required(),
+    Allbeds:Joi.number().required(),
+    Ambulances:Joi.number().required()
+  
+  });
+   let result =hospitalSchema.validate(req.body)
+   if(result.error){
+       res.status(400).send(result.error.details[0].message)
+       return ;
+   }
+   const exist = await Hospital.exists({HospitalName:req.body. HospitalName});
         if(exist){
             return  res.status(400).send("Hospital already registered!");
         } 
-
-    }catch(err){
-        res.status(500).json(err)
-    }
-    const {HospitalName,hospitalLocation,latitude,longitude,alldoctors,Allbeds,Ambulances }= req.body ;
-    const newHospital = new Hospital({
-        HospitalName,
-        hospitalLocation,
-        latitude,
-        longitude,
-        alldoctors,
-        Allbeds,
-        Ambulances
-    });
-    try{
-        const savedHospital = await newHospital.save();
-        res.status(201).json(savedHospital);
-        console.log(savedHospital)
-        }catch(err){
-            res.status(500).json(err)
-        }
+  const newHospital = new Hospital({
+    HospitalName,
+    hospitalLocation,
+    latitude,
+    longitude,
+    alldoctors,
+    Allbeds,
+    Ambulances
+});
+ try{
+  const savedHospital = await newHospital.save();
+  res.status(201).json(savedHospital);
+ }catch(err){
+     res.status(500).json(err)
+ }
 } 
 
 /**
