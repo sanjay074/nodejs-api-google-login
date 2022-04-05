@@ -26,6 +26,14 @@ const hospitalSchema = new Schema({
     Ambulances:{
         type:Number,
         required:true 
+    },
+    TotalBeds:{
+        type:Number,
+        required:true
+    },
+    Vacant:{
+        type:Number,
+        required:true
     }
 });
 module.exports = mongoose.model('Hospital', hospitalSchema);

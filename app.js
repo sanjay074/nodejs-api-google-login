@@ -6,6 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fileRoutes = require('./imageupload/routes/file-upload-routes');
+const departmentRouter = require('./department/routes/doctor');
 const userRoute = require('./router/auth');
 require('./controllers/passport')(passport);
 const app = express();
@@ -19,5 +20,6 @@ mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlPar
 app.use('/login', userRoute);
 app.use('/api', hospitalRoutes);
 app.use('/api', fileRoutes);
+app.use('/api',departmentRouter);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('Server is running on: ' + PORT));

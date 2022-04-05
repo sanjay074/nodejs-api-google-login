@@ -1,7 +1,7 @@
 const Joi =require ("joi");
 const Hospital = require('../models/hospital');
 exports.addHospital = async(req,res)=>{
-  let {HospitalName,hospitalLocation,latitude,longitude,alldoctors,Allbeds,Ambulances }= req.body 
+  let {HospitalName,hospitalLocation,latitude,longitude,alldoctors,Allbeds,Ambulances,TotalBeds, Vacant }= req.body 
   const hospitalSchema = Joi.object({
     HospitalName:Joi.string().required(),
     hospitalLocation:Joi.string().required(),
@@ -9,7 +9,9 @@ exports.addHospital = async(req,res)=>{
     longitude:Joi.number().required(),
     alldoctors:Joi.number().required(),
     Allbeds:Joi.number().required(),
-    Ambulances:Joi.number().required()
+    Ambulances:Joi.number().required(),
+    TotalBeds:Joi.number().required(),
+    Vacant:Joi.number().required(),
   
   });
    let result =hospitalSchema.validate(req.body)
@@ -28,7 +30,9 @@ exports.addHospital = async(req,res)=>{
     longitude,
     alldoctors,
     Allbeds,
-    Ambulances
+    Ambulances,
+    TotalBeds,
+    Vacant
 });
  try{
   const savedHospital = await newHospital.save();
