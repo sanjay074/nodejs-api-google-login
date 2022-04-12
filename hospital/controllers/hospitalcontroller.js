@@ -18,8 +18,8 @@ exports.addHospital = async(req,res)=>{
    if(result.error){
        res.status(400).send(result.error.details[0].message)
        return ;
-   }
-   const exist = await Hospital.exists({HospitalName:req.body. HospitalName});
+   } 
+   const exist = await Hospital.exists({HospitalName:req.body.HospitalName});
         if(exist){
             return  res.status(400).send("Hospital already registered!");
         } 
