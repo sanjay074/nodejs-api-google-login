@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const servicesSchema = new Schema({
-    services: {
-        type: String
-    },
-}, {
-        collection: 'services'
-    });
+    services:{
+        type: Array
+    }
+    })
 module.exports = mongoose.model('Services', servicesSchema);

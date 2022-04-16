@@ -6,13 +6,13 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fileRoutes = require('./imageupload/routes/file-upload-routes');
-const uploadRoutes = require('./pdfupload/routes/upload');
+
 const departmentRouter = require('./department/routes/doctor');
 const servicesRouter = require('./hospitalServices/routes/services');
 const userRoute = require('./router/auth');
 require('./controllers/passport')(passport);
 const app = express();
-app.set("view engine", "ejs");
+
 app.use(cors());
 app.use(express.json()); 
 app.use(bodyParser.json());
@@ -25,6 +25,5 @@ app.use('/api', hospitalRoutes);
 app.use('/api', fileRoutes);
 app.use('/api',departmentRouter);
 app.use('/api',servicesRouter);
-app.use('/api' ,uploadRoutes)
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('Server is running on: ' + PORT));
