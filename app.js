@@ -6,7 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fileRoutes = require('./imageupload/routes/file-upload-routes');
-
+const faciles = require('./facilies/routes/facilies');
 const departmentRouter = require('./department/routes/doctor');
 const servicesRouter = require('./hospitalServices/routes/services');
 const userRoute = require('./router/auth');
@@ -25,5 +25,6 @@ app.use('/api', hospitalRoutes);
 app.use('/api', fileRoutes);
 app.use('/api',departmentRouter);
 app.use('/api',servicesRouter);
+app.use('/api',faciles)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('Server is running on: ' + PORT));
